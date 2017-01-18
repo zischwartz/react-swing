@@ -94,7 +94,9 @@ class Swing extends Component {
     }
 
     render() {
-        const { children, setStack, tagName, config, ...others } = this.props;
+        // XXX added throwout here, to prevent it from being passed to the child
+        // as it is not a valid dom prop so causes errors
+        const { children, setStack, tagName, config, throwout, ...others } = this.props;
         const Tag = tagName;
 
         return (

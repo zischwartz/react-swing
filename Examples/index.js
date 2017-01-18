@@ -7,6 +7,7 @@ import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 
 import Swing from '../dist/Swing.js';
+import {Direction} from '../dist/Swing.js';
 
 class App extends Component {
 
@@ -37,8 +38,8 @@ class App extends Component {
 
     render() {
         // https://github.com/gajus/swing#configuration
-        // let config = {allowedDirections: ["UP", "DOWN", "LEFT", "RIGHT"]}
-        let config = {};
+        let config = {allowedDirections: [Direction.UP, Direction.DOWN, Direction.LEFT, Direction.RIGHT]}
+        // let config = {};
 
         return (
             <div>
@@ -56,11 +57,12 @@ class App extends Component {
                     >
                         {/*
                             children elements is will be Card
+                            also XXX removed refs
                         */}
-                        <div className="card clubs" ref="card1" throwout={(e)=>console.log('card throwout',e)}>z♣</div>
-                        <div className="card diamonds" ref="card2">♦</div>
-                        <div className="card hearts" ref="card3">♥</div>
-                        <div className="card spades" ref="card4">z♠</div>
+                        <div className="card clubs" >z♣</div>
+                        <div className="card diamonds" >♦</div>
+                        <div className="card hearts" >♥</div>
+                        <div className="card spades">z♠</div>
                     </Swing>
                 </div>
                 <div className="control">
@@ -72,5 +74,9 @@ class App extends Component {
         )
     }
 }
+
+// XXX removed throwout
+//  <div className="card clubs" ref="card1" throwout={(e)=>console.log('card throwout',e)}>z♣</div>
+
 
 ReactDOM.render(<App/>, document.getElementById('app'));

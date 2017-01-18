@@ -8,7 +8,7 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.Card = exports.Stack = undefined;
+exports.Direction = exports.Card = exports.Stack = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -120,12 +120,15 @@ var Swing = function (_Component) {
     }, {
         key: 'render',
         value: function render() {
+            // XXX added throwout here, to prevent it from being passed to the child
+            // as it is not a valid dom prop so causes errors
             var _props = this.props,
                 children = _props.children,
                 setStack = _props.setStack,
                 tagName = _props.tagName,
                 config = _props.config,
-                others = _objectWithoutProperties(_props, ['children', 'setStack', 'tagName', 'config']);
+                throwout = _props.throwout,
+                others = _objectWithoutProperties(_props, ['children', 'setStack', 'tagName', 'config', 'throwout']);
 
             var Tag = tagName;
 
@@ -157,3 +160,4 @@ Swing.defaultProps = {
 exports.default = Swing;
 exports.Stack = _swing.Stack;
 exports.Card = _swing.Card;
+exports.Direction = _swing.Direction;
