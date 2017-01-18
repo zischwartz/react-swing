@@ -22,32 +22,37 @@ class App extends Component {
       // console.log("swingThrowOutDone", e)
       // const element = ReactDOM.findDOMNode(this.refs[`${ref}`]);
       console.log("swingThrowOutDone", e.target.innerHTML, e.throwDirection)
+      // this seems to have no effect
       // let el = ReactDOM.findDOMNode(e.target);
       // let card = this.stack.getCard(el)
       // this.stack.destroyCard(card)
+
+      // this unbinds the events, dur
       // card.destroy()
-      // const card = stack.createCard(element);
+      // console.log(this.state.cards)
+
       // console.log(e,x)
-      // probs don't do this XXX
+      // probs don't do this XXX, whoops
       // something slightly more sophisticated is in order, some sort of cleanup?
       // or at least don't let the user do anything during this timeout
-      // setTimeout( ()=>{
-        // let cards = this.state.cards
-        // cards.pop()
-        // this.setState({cards})
-      // }, 150)
+      setTimeout( ()=>{
+        let cards = this.state.cards
+        cards.shift()
+        this.setState({cards})
+      }, 150)
 
     }
     addCard(){
       let cards = this.state.cards
-      cards.unshift('n'+this.state.cards.length) // these will need to be unique
+      cards.push('n'+this.state.cards.length)
+      // cards.unshift('n'+this.state.cards.length) // these will need to be unique
       this.setState({cards})
     }
     // programatically throw the top card
     // we'll use this mostly for dev/debug, but
     // i'm sure this will come up in game too
     throwTopCard() {
-      let top = this.state.cards[this.state.cards.length-1]
+      let top = this.state.cards[0]
       let el = this.refs.stack.refs[top]
       el = ReactDOM.findDOMNode(el) // ??? needed or no
       let card = this.stack.getCard(el)
@@ -59,7 +64,7 @@ class App extends Component {
       return true // default
     }
     render() {
-      console.log('app rendez')
+      // console.log('app render')
         // https://github.com/gajus/swing#configuration
         let config = {allowedDirections: [Direction.UP, Direction.DOWN, Direction.LEFT, Direction.RIGHT]}
         // let config = {};

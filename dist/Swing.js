@@ -52,10 +52,8 @@ var Swing = function (_Component) {
         value: function componentDidMount() {
             var _this2 = this;
 
-            console.log("componentDidMount");
             var events = ['throwout', 'throwoutend', 'throwoutleft', 'throwoutright', 'throwin', 'throwinend', 'dragstart', 'dragmove', 'dragend'];
             var stack = this.state.stack;
-            console.log('mapping events ❌');
             events.map(function (event) {
                 if (_this2.props[event]) {
                     stack.on(event, _this2.props[event]);
@@ -66,7 +64,7 @@ var Swing = function (_Component) {
                 var ref = child.ref || key;
                 var element = _reactDom2.default.findDOMNode(_this2.refs['' + ref]);
                 var card = stack.createCard(element);
-                // card.throwIn(0,-1) // needed?
+                card.throwIn(0, -1); // needed?
                 // let ref = child.ref || key;
                 // let el = ReactDOM.findDOMNode(this.refs[`${ref}`]);
                 // // zomg this is it
@@ -103,7 +101,7 @@ var Swing = function (_Component) {
                 // });
 
                 _react2.default.Children.forEach(this.props.children, function (child, key) {
-                    console.log(_this3.state.stack);
+                    // console.log(this.state.stack)
                     var ref = child.ref || key;
                     var el = _reactDom2.default.findDOMNode(_this3.refs['' + ref]);
                     // aha!
@@ -142,10 +140,9 @@ var Swing = function (_Component) {
     }, {
         key: 'render',
         value: function render() {
-            console.log('swing render');
+            // console.log('swing render' )
             // XXX added throwout here, to prevent it from being passed to the child
             // as it is not a valid dom prop so causes errors
-
             var _props = this.props,
                 children = _props.children,
                 setStack = _props.setStack,

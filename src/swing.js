@@ -33,10 +33,8 @@ class Swing extends Component {
     }
 
     componentDidMount() {
-        console.log("componentDidMount")
         const events = ['throwout','throwoutend', 'throwoutleft', 'throwoutright', 'throwin', 'throwinend', 'dragstart', 'dragmove','dragend'];
         const stack = this.state.stack;
-        console.log('mapping events ❌')
         events.map((event) => {
             if (this.props[event]) {
                 stack.on(event, this.props[event]);
@@ -47,7 +45,7 @@ class Swing extends Component {
             let ref = child.ref || key;
             let element = ReactDOM.findDOMNode(this.refs[`${ref}`]);
             let card = stack.createCard(element);
-            // card.throwIn(0,-1) // needed?
+            card.throwIn(0,-1) // needed?
             // let ref = child.ref || key;
             // let el = ReactDOM.findDOMNode(this.refs[`${ref}`]);
             // // zomg this is it
@@ -81,7 +79,7 @@ class Swing extends Component {
         // });
 
         React.Children.forEach(this.props.children, (child, key) => {
-            console.log(this.state.stack)
+            // console.log(this.state.stack)
             let ref = child.ref || key;
             let el = ReactDOM.findDOMNode(this.refs[`${ref}`]);
             // aha!
@@ -119,7 +117,7 @@ class Swing extends Component {
     }
 
     render() {
-        console.log('swing render' )
+        // console.log('swing render' )
         // XXX added throwout here, to prevent it from being passed to the child
         // as it is not a valid dom prop so causes errors
         const { children, setStack, tagName, config, throwout, throwoutend, ...others } = this.props;
