@@ -4,7 +4,7 @@ var jsdom = require('mocha-jsdom');
 var assert = require('assert');
 var React = require('react');
 var ReactDOM = require('react-dom');
-var TestUtils = require('react-addons-test-utils');
+var TestUtils = require('react-addons-test-utils')
 
 describe('Testing Swing Component', function() {
     jsdom({ skipWindowCheck: true });
