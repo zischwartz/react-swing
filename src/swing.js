@@ -33,9 +33,10 @@ class Swing extends Component {
     }
 
     componentDidMount() {
+        console.log("componentDidMount")
         const events = ['throwout','throwoutend', 'throwoutleft', 'throwoutright', 'throwin', 'throwinend', 'dragstart', 'dragmove','dragend'];
         const stack = this.state.stack;
-
+        console.log('mapping events ❌')
         events.map((event) => {
             if (this.props[event]) {
                 stack.on(event, this.props[event]);
@@ -43,15 +44,15 @@ class Swing extends Component {
         });
 
         React.Children.forEach(this.props.children, (child, key) => {
-            const ref = child.ref || key;
-            const element = ReactDOM.findDOMNode(this.refs[`${ref}`]);
-            const card = stack.createCard(element);
-
-            events.map((event) => {
-                if (child.props[event]) {
-                    card.on(event, child.props[event]);
-                }
-            });
+            let ref = child.ref || key;
+            let element = ReactDOM.findDOMNode(this.refs[`${ref}`]);
+            let card = stack.createCard(element);
+            card.throwIn(0,-1) // needed?
+            // events.map((event) => {
+            //     if (child.props[event]) {
+            //         card.on(event, child.props[event]);
+            //     }
+            // });
         });
 
         this.setState({
@@ -61,6 +62,7 @@ class Swing extends Component {
     }
 
     componentDidUpdate(prevProps, prevState){
+      // console.log("componentDidUpdate", this.props.children.length,  prevProps.children.length )
       if(this.props.children.length > prevProps.children.length){
         const events = ['throwout','throwoutend', 'throwoutleft', 'throwoutright', 'throwin', 'throwinend', 'dragstart', 'dragmove','dragend'];
         const stack = this.state.stack;
@@ -73,20 +75,24 @@ class Swing extends Component {
         // });
 
         React.Children.forEach(this.props.children, (child, key) => {
-            const ref = child.ref || key;
-            const element = ReactDOM.findDOMNode(this.refs[`${ref}`]);
-            const card = stack.createCard(element);
-            let result = prevProps.children.find((c) => {
-              return c.key === child.key
-            })
-
-            if(!result){
-              events.map((event) => {
-                  if (child.props[event]) {
-                      card.on(event, child.props[event]);
-                  }
-              });
-            }
+            let ref = child.ref || key;
+            let el = ReactDOM.findDOMNode(this.refs[`${ref}`]);
+            // let card = stack.createCard(element);
+            // zomg this is it
+            let card = Card(stack, el)
+            card.throwIn(0,-1)
+            // console.log(card)
+            // let result = prevProps.children.find((c) => {
+            //   return c.key === child.key
+            // })
+            //
+            // if(!result){
+            //   events.map((event) => {
+            //       if (child.props[event]) {
+            //           card.on(event, child.props[event]);
+            //       }
+            //   });
+            // }
         });
         this.setState({
             stack: stack
@@ -99,12 +105,13 @@ class Swing extends Component {
         console.log('swing render' )
         // XXX added throwout here, to prevent it from being passed to the child
         // as it is not a valid dom prop so causes errors
-        const { children, setStack, tagName, config, throwout, ...others } = this.props;
+        const { children, setStack, tagName, config, throwout, throwoutend, ...others } = this.props;
+        // const { children, setStack, tagName, config, throwout, throwoutend, ...others } = this.props;
         const Tag = tagName;
-
         return (
             <Tag {...others}>
                 {React.Children.map(children, (child, key) => {
+                    // console.log(key, child)
                     const ref = child.ref || key;
                     return React.cloneElement(child, {
                         ref: `${ref}`

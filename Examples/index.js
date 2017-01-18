@@ -19,15 +19,23 @@ class App extends Component {
         };
     }
     swingThrowOutDone(e){
-      console.log("swingThrowOutDone", e)
+      // console.log("swingThrowOutDone", e)
+      // const element = ReactDOM.findDOMNode(this.refs[`${ref}`]);
+      console.log("swingThrowOutDone", e.target.innerHTML, e.throwDirection)
+      // let el = ReactDOM.findDOMNode(e.target);
+      // let card = this.stack.getCard(el)
+      // this.stack.destroyCard(card)
+      // card.destroy()
+      // const card = stack.createCard(element);
+      // console.log(e,x)
       // probs don't do this XXX
       // something slightly more sophisticated is in order, some sort of cleanup?
       // or at least don't let the user do anything during this timeout
-      setTimeout( ()=>{
-        let cards = this.state.cards
-        cards.pop()
-        this.setState({cards})
-      }, 150)
+      // setTimeout( ()=>{
+        // let cards = this.state.cards
+        // cards.pop()
+        // this.setState({cards})
+      // }, 150)
 
     }
     addCard(){
@@ -44,18 +52,22 @@ class App extends Component {
       el = ReactDOM.findDOMNode(el) // ??? needed or no
       let card = this.stack.getCard(el)
       // card.throwOut(100, -200)
-      card.throwOut(-0.1, -1) // doesn't seem to matter bah
+      card.throwOut(-0.1, -4) // doesn't seem to matter bah
       // can't use the directions symbols here, or it won't move the dom element (until )
     }
     shouldComponentUpdate(nextProps, nextState){
       return true // default
     }
     render() {
+      console.log('app rendez')
         // https://github.com/gajus/swing#configuration
         let config = {allowedDirections: [Direction.UP, Direction.DOWN, Direction.LEFT, Direction.RIGHT]}
         // let config = {};
-        console.log('render', this.state.cards)
+        // console.log('render', this.state.cards)
         //moved stack simply to this.stack from this.state. causing rerenders we don't want
+        // gah throwout vs throwoutend
+        // throwout={(e)=>this.swingThrowOutDone(e)} >
+
         return (
             <div>
                 <div id="viewport">
@@ -65,10 +77,10 @@ class App extends Component {
                         setStack={(stack)=> this.stack = stack }
                         ref="stack"
                         config={config}
-                        throwout={e=>this.swingThrowOutDone(e)} >
+                        throwout={(e)=>this.swingThrowOutDone(e)} >
 
                       {this.state.cards.map( (x,i)=> {
-                        return <div key={i} ref={x} className="card">🥑{i}{x}</div> }
+                        return <div key={x} ref={x} className="card">{x}</div> }
                       )}
                     </Swing>
                 </div>

@@ -52,9 +52,10 @@ var Swing = function (_Component) {
         value: function componentDidMount() {
             var _this2 = this;
 
+            console.log("componentDidMount");
             var events = ['throwout', 'throwoutend', 'throwoutleft', 'throwoutright', 'throwin', 'throwinend', 'dragstart', 'dragmove', 'dragend'];
             var stack = this.state.stack;
-
+            console.log('mapping events ❌');
             events.map(function (event) {
                 if (_this2.props[event]) {
                     stack.on(event, _this2.props[event]);
@@ -65,12 +66,12 @@ var Swing = function (_Component) {
                 var ref = child.ref || key;
                 var element = _reactDom2.default.findDOMNode(_this2.refs['' + ref]);
                 var card = stack.createCard(element);
-
-                events.map(function (event) {
-                    if (child.props[event]) {
-                        card.on(event, child.props[event]);
-                    }
-                });
+                card.throwIn(0, -1); // needed?
+                // events.map((event) => {
+                //     if (child.props[event]) {
+                //         card.on(event, child.props[event]);
+                //     }
+                // });
             });
 
             this.setState({
@@ -83,6 +84,7 @@ var Swing = function (_Component) {
         value: function componentDidUpdate(prevProps, prevState) {
             var _this3 = this;
 
+            // console.log("componentDidUpdate", this.props.children.length,  prevProps.children.length )
             if (this.props.children.length > prevProps.children.length) {
                 (function () {
                     var events = ['throwout', 'throwoutend', 'throwoutleft', 'throwoutright', 'throwin', 'throwinend', 'dragstart', 'dragmove', 'dragend'];
@@ -97,19 +99,22 @@ var Swing = function (_Component) {
 
                     _react2.default.Children.forEach(_this3.props.children, function (child, key) {
                         var ref = child.ref || key;
-                        var element = _reactDom2.default.findDOMNode(_this3.refs['' + ref]);
-                        var card = stack.createCard(element);
-                        var result = prevProps.children.find(function (c) {
-                            return c.key === child.key;
-                        });
-
-                        if (!result) {
-                            events.map(function (event) {
-                                if (child.props[event]) {
-                                    card.on(event, child.props[event]);
-                                }
-                            });
-                        }
+                        var el = _reactDom2.default.findDOMNode(_this3.refs['' + ref]);
+                        // let card = stack.createCard(element);
+                        var card = (0, _swing.Card)(stack, el);
+                        card.throwIn(0, -1);
+                        // console.log(card)
+                        // let result = prevProps.children.find((c) => {
+                        //   return c.key === child.key
+                        // })
+                        //
+                        // if(!result){
+                        //   events.map((event) => {
+                        //       if (child.props[event]) {
+                        //           card.on(event, child.props[event]);
+                        //       }
+                        //   });
+                        // }
                     });
                     _this3.setState({
                         stack: stack
@@ -131,14 +136,17 @@ var Swing = function (_Component) {
                 tagName = _props.tagName,
                 config = _props.config,
                 throwout = _props.throwout,
-                others = _objectWithoutProperties(_props, ['children', 'setStack', 'tagName', 'config', 'throwout']);
+                throwoutend = _props.throwoutend,
+                others = _objectWithoutProperties(_props, ['children', 'setStack', 'tagName', 'config', 'throwout', 'throwoutend']);
+            // const { children, setStack, tagName, config, throwout, throwoutend, ...others } = this.props;
+
 
             var Tag = tagName;
-
             return _react2.default.createElement(
                 Tag,
                 others,
                 _react2.default.Children.map(children, function (child, key) {
+                    // console.log(key, child)
                     var ref = child.ref || key;
                     return _react2.default.cloneElement(child, {
                         ref: '' + ref
