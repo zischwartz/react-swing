@@ -47,7 +47,13 @@ class Swing extends Component {
             let ref = child.ref || key;
             let element = ReactDOM.findDOMNode(this.refs[`${ref}`]);
             let card = stack.createCard(element);
-            card.throwIn(0,-1) // needed?
+            // card.throwIn(0,-1) // needed?
+            // let ref = child.ref || key;
+            // let el = ReactDOM.findDOMNode(this.refs[`${ref}`]);
+            // // zomg this is it
+            // let card = Card(stack, el)
+            // card.throwIn(0,-1)
+
             // events.map((event) => {
             //     if (child.props[event]) {
             //         card.on(event, child.props[event]);
@@ -75,12 +81,23 @@ class Swing extends Component {
         // });
 
         React.Children.forEach(this.props.children, (child, key) => {
+            console.log(this.state.stack)
             let ref = child.ref || key;
             let el = ReactDOM.findDOMNode(this.refs[`${ref}`]);
-            // let card = stack.createCard(element);
+            // aha!
+            if (!this.state.stack.getCard(el)){
+              let card = this.state.stack.createCard(el);
+              card.throwIn(0,-1)
+            }
+            // console.log(stack.getCard(el) )
+            // we need to check and only create the card IF it's not already been created
+            // we need to check and only create the card IF it's not already been created
+            // we need to check and only create the card IF it's not already been created
+            // let card = this.stack.createCard(el);
             // zomg this is it
-            let card = Card(stack, el)
-            card.throwIn(0,-1)
+            // https://github.com/gajus/swing/blob/1dc4ad9665cd42e5ace7006f90bdec92b8a3f03c/src/Card.js#L39
+            // let card = Card(stack, el)
+            // card.throwIn(0,-1)
             // console.log(card)
             // let result = prevProps.children.find((c) => {
             //   return c.key === child.key

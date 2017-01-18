@@ -66,7 +66,13 @@ var Swing = function (_Component) {
                 var ref = child.ref || key;
                 var element = _reactDom2.default.findDOMNode(_this2.refs['' + ref]);
                 var card = stack.createCard(element);
-                card.throwIn(0, -1); // needed?
+                // card.throwIn(0,-1) // needed?
+                // let ref = child.ref || key;
+                // let el = ReactDOM.findDOMNode(this.refs[`${ref}`]);
+                // // zomg this is it
+                // let card = Card(stack, el)
+                // card.throwIn(0,-1)
+
                 // events.map((event) => {
                 //     if (child.props[event]) {
                 //         card.on(event, child.props[event]);
@@ -86,41 +92,51 @@ var Swing = function (_Component) {
 
             // console.log("componentDidUpdate", this.props.children.length,  prevProps.children.length )
             if (this.props.children.length > prevProps.children.length) {
-                (function () {
-                    var events = ['throwout', 'throwoutend', 'throwoutleft', 'throwoutright', 'throwin', 'throwinend', 'dragstart', 'dragmove', 'dragend'];
-                    var stack = _this3.state.stack;
-                    // XXX I think this is causing multiple calls XXX Zach
-                    // seems to be, also unneccesary
-                    // events.map((event) => {
-                    //     if (this.props[event]) {
-                    //         stack.on(event, this.props[event]);
-                    //     }
-                    // });
+                var events = ['throwout', 'throwoutend', 'throwoutleft', 'throwoutright', 'throwin', 'throwinend', 'dragstart', 'dragmove', 'dragend'];
+                var stack = this.state.stack;
+                // XXX I think this is causing multiple calls XXX Zach
+                // seems to be, also unneccesary
+                // events.map((event) => {
+                //     if (this.props[event]) {
+                //         stack.on(event, this.props[event]);
+                //     }
+                // });
 
-                    _react2.default.Children.forEach(_this3.props.children, function (child, key) {
-                        var ref = child.ref || key;
-                        var el = _reactDom2.default.findDOMNode(_this3.refs['' + ref]);
-                        // let card = stack.createCard(element);
-                        var card = (0, _swing.Card)(stack, el);
+                _react2.default.Children.forEach(this.props.children, function (child, key) {
+                    console.log(_this3.state.stack);
+                    var ref = child.ref || key;
+                    var el = _reactDom2.default.findDOMNode(_this3.refs['' + ref]);
+                    // aha!
+                    if (!_this3.state.stack.getCard(el)) {
+                        var card = _this3.state.stack.createCard(el);
                         card.throwIn(0, -1);
-                        // console.log(card)
-                        // let result = prevProps.children.find((c) => {
-                        //   return c.key === child.key
-                        // })
-                        //
-                        // if(!result){
-                        //   events.map((event) => {
-                        //       if (child.props[event]) {
-                        //           card.on(event, child.props[event]);
-                        //       }
-                        //   });
-                        // }
-                    });
-                    _this3.setState({
-                        stack: stack
-                    });
-                    _this3.props.setStack(stack);
-                })();
+                    }
+                    // console.log(stack.getCard(el) )
+                    // we need to check and only create the card IF it's not already been created
+                    // we need to check and only create the card IF it's not already been created
+                    // we need to check and only create the card IF it's not already been created
+                    // let card = this.stack.createCard(el);
+                    // zomg this is it
+                    // https://github.com/gajus/swing/blob/1dc4ad9665cd42e5ace7006f90bdec92b8a3f03c/src/Card.js#L39
+                    // let card = Card(stack, el)
+                    // card.throwIn(0,-1)
+                    // console.log(card)
+                    // let result = prevProps.children.find((c) => {
+                    //   return c.key === child.key
+                    // })
+                    //
+                    // if(!result){
+                    //   events.map((event) => {
+                    //       if (child.props[event]) {
+                    //           card.on(event, child.props[event]);
+                    //       }
+                    //   });
+                    // }
+                });
+                this.setState({
+                    stack: stack
+                });
+                this.props.setStack(stack);
             }
         }
     }, {
