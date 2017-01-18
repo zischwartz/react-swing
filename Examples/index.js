@@ -34,8 +34,12 @@ class App extends Component {
         // throwOut method call
         card.throwOut(100, 200);
     }
-    
+
     render() {
+        // https://github.com/gajus/swing#configuration
+        // let config = {allowedDirections: ["UP", "DOWN", "LEFT", "RIGHT"]}
+        let config = {};
+
         return (
             <div>
                 <div id="viewport">
@@ -47,15 +51,16 @@ class App extends Component {
                         tagName="div"
                         setStack={(stack)=> this.setState({stack:stack})}
                         ref="stack"
+                        config={config}
                         throwout={(e)=>console.log('throwout',e)}
                     >
                         {/*
                             children elements is will be Card
                         */}
-                        <div className="card clubs" ref="card1" throwout={(e)=>console.log('card throwout',e)}>♣</div>
+                        <div className="card clubs" ref="card1" throwout={(e)=>console.log('card throwout',e)}>z♣</div>
                         <div className="card diamonds" ref="card2">♦</div>
                         <div className="card hearts" ref="card3">♥</div>
-                        <div className="card spades" ref="card4">♠</div>
+                        <div className="card spades" ref="card4">z♠</div>
                     </Swing>
                 </div>
                 <div className="control">
