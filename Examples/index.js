@@ -56,7 +56,7 @@ class App extends Component {
                         throwout={(e)=>console.log('throwout',e)}
                     >
                         {/*
-                            children elements is will be Card
+                            children elements will be Cards
                             also XXX removed refs
                         */}
                         <div className="card spades">🥑</div>
