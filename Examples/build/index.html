@@ -1,7 +1,6 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title> React Swing Cards</title>
     <style>
         html,
         body,
@@ -38,6 +37,16 @@
 
         #viewport .card {
             width: 200px; height: 300px; list-style: none; background: #fff; border-radius: 5px; position: absolute; top: 0; left: 0; box-shadow: 0 0 2px rgba(0,0,0,.2), 1px 1px 1px rgba(0,0,0,.2); line-height: 300px; text-align: center; font-size: 100px; border: 10px solid #ECECEC; box-sizing: border-box; cursor: default;
+            filter: blur(5px);
+            /* do content not actually card */
+            /*-webkit-filter: blur(15px);*/
+            transition: 1s -webkit-filter;
+            /*only works this way?*/
+
+        }
+
+        #viewport .card:last-child {
+          filter: blur(0px);
         }
 
         #viewport .clubs,

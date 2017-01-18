@@ -4,8 +4,8 @@ This is my fork of this library that adds things I needed.
 
 ## TODO
 - [x] implement allowedDirections
-- [ ] way to dynamically add a card to back (end/last) of stack
-- [ ] throw top card via button or key press in any direction
+- [x] way to dynamically add a card to back (end/last) of stack
+- [x] throw top card via button or key press in any direction
 
 
 [![Travis build status](http://img.shields.io/travis/ssanjun/react-swing/master.svg?style=flat-square)](https://travis-ci.org/ssanjun/react-swing)

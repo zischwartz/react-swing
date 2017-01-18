@@ -42,8 +42,7 @@ var Swing = function (_Component) {
 
         var stack = (0, _swing.Stack)(props.config);
         _this.state = {
-            stack: stack,
-            cardList: []
+            stack: stack
         };
         return _this;
     }
@@ -88,11 +87,13 @@ var Swing = function (_Component) {
                 (function () {
                     var events = ['throwout', 'throwoutend', 'throwoutleft', 'throwoutright', 'throwin', 'throwinend', 'dragstart', 'dragmove', 'dragend'];
                     var stack = _this3.state.stack;
-                    events.map(function (event) {
-                        if (_this3.props[event]) {
-                            stack.on(event, _this3.props[event]);
-                        }
-                    });
+                    // XXX I think this is causing multiple calls XXX Zach
+                    // seems to be, also unneccesary
+                    // events.map((event) => {
+                    //     if (this.props[event]) {
+                    //         stack.on(event, this.props[event]);
+                    //     }
+                    // });
 
                     _react2.default.Children.forEach(_this3.props.children, function (child, key) {
                         var ref = child.ref || key;
@@ -120,8 +121,10 @@ var Swing = function (_Component) {
     }, {
         key: 'render',
         value: function render() {
+            console.log('swing render');
             // XXX added throwout here, to prevent it from being passed to the child
             // as it is not a valid dom prop so causes errors
+
             var _props = this.props,
                 children = _props.children,
                 setStack = _props.setStack,
@@ -149,13 +152,13 @@ var Swing = function (_Component) {
 }(_react.Component);
 
 Swing.propTypes = {
-    children: _react.PropTypes.node.isRequired,
     setStack: _react.PropTypes.func.isRequired,
     tagName: _react.PropTypes.string,
     config: _react.PropTypes.object
 };
 Swing.defaultProps = {
-    tagName: 'div'
+    tagName: 'div',
+    children: [] // moved from required PropTypes to default of empty array here
 };
 exports.default = Swing;
 exports.Stack = _swing.Stack;

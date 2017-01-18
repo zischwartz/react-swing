@@ -12,14 +12,14 @@ import { Stack, Card , Direction} from 'swing';
 
 class Swing extends Component {
     static propTypes = {
-        children: PropTypes.node.isRequired,
         setStack: PropTypes.func.isRequired,
         tagName: PropTypes.string,
         config: PropTypes.object
     };
 
     static defaultProps = {
-        tagName: 'div'
+        tagName: 'div',
+        children: [] // moved from required PropTypes to default of empty array here
     };
 
     constructor(props, context) {
@@ -28,7 +28,7 @@ class Swing extends Component {
         const stack = Stack(props.config);
         this.state = {
             stack: stack,
-            cardList: []
+            // cardList: [] // XXX removed by Zach, this doesn't seem to appear anywhere in either library
         };
     }
 
@@ -64,11 +64,13 @@ class Swing extends Component {
       if(this.props.children.length > prevProps.children.length){
         const events = ['throwout','throwoutend', 'throwoutleft', 'throwoutright', 'throwin', 'throwinend', 'dragstart', 'dragmove','dragend'];
         const stack = this.state.stack;
-        events.map((event) => {
-            if (this.props[event]) {
-                stack.on(event, this.props[event]);
-            }
-        });
+        // XXX I think this is causing multiple calls XXX Zach
+        // seems to be, also unneccesary
+        // events.map((event) => {
+        //     if (this.props[event]) {
+        //         stack.on(event, this.props[event]);
+        //     }
+        // });
 
         React.Children.forEach(this.props.children, (child, key) => {
             const ref = child.ref || key;
@@ -94,6 +96,7 @@ class Swing extends Component {
     }
 
     render() {
+        console.log('swing render' )
         // XXX added throwout here, to prevent it from being passed to the child
         // as it is not a valid dom prop so causes errors
         const { children, setStack, tagName, config, throwout, ...others } = this.props;
