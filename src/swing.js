@@ -7,7 +7,7 @@
 
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
-import { Stack, Card } from 'swing';
+import { Stack, Card , Direction} from 'swing';
 
 
 class Swing extends Component {
@@ -111,4 +111,4 @@ class Swing extends Component {
 }
 
 export default Swing;
-export { Stack, Card };
+export { Stack, Card, Direction };

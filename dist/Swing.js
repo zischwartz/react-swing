@@ -38,7 +38,7 @@ var Swing = function (_Component) {
     function Swing(props, context) {
         _classCallCheck(this, Swing);
 
-        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Swing).call(this, props, context));
+        var _this = _possibleConstructorReturn(this, (Swing.__proto__ || Object.getPrototypeOf(Swing)).call(this, props, context));
 
         var stack = (0, _swing.Stack)(props.config);
         _this.state = {
@@ -120,13 +120,12 @@ var Swing = function (_Component) {
     }, {
         key: 'render',
         value: function render() {
-            var _props = this.props;
-            var children = _props.children;
-            var setStack = _props.setStack;
-            var tagName = _props.tagName;
-            var config = _props.config;
-
-            var others = _objectWithoutProperties(_props, ['children', 'setStack', 'tagName', 'config']);
+            var _props = this.props,
+                children = _props.children,
+                setStack = _props.setStack,
+                tagName = _props.tagName,
+                config = _props.config,
+                others = _objectWithoutProperties(_props, ['children', 'setStack', 'tagName', 'config']);
 
             var Tag = tagName;
 
