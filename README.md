@@ -1,5 +1,13 @@
 # React Swing Component
 
+This is my fork of this library that adds things I needed.
+
+## TODO
+- [x] implement allowedDirections
+- [ ] way to dynamically add a card to back (end/last) of stack
+- [ ] throw top card via button or key press in any direction
+
+
 [![Travis build status](http://img.shields.io/travis/ssanjun/react-swing/master.svg?style=flat-square)](https://travis-ci.org/ssanjun/react-swing)
 [![NPM version](http://img.shields.io/npm/v/react-swing.svg?style=flat-square)](https://www.npmjs.org/package/react-swing)
 
@@ -36,7 +44,7 @@ react-swing is a React component for implementing [swing](https://github.com/gaj
 [more information](https://github.com/gajus/swing#events)
 
 ### Component Event Props Example
-Using 'event name' set Swing Props and passing parameter as function 
+Using 'event name' set Swing Props and passing parameter as function
 ```javascript
     <Swing
         className="stack"
@@ -63,7 +71,7 @@ Using 'event name' set Swing Props and passing parameter as function
     /project/node_modules/hammerjs/hammer.js:2643
     })(window, document, 'Hammer');
        ^
-    
+
     ReferenceError: window is not defined
         at Object.<anonymous> (/Users/ssanjun/Documents/project/quizz/node_modules/hammerjs/hammer.js:2643:4)
         at Module._compile (module.js:541:32)
@@ -89,9 +97,9 @@ check the [this issue](https://github.com/hammerjs/hammer.js/pull/973). it will 
             mounted: true
         });
     }
-    
-    ... 
-    
+
+    ...
+
     // render
     render() {
         return (
@@ -114,4 +122,4 @@ lazy-loading 'react-swing' component.
 it will be work.
 
 ## Thankyou for
-[https://github.com/gajus](https://github.com/gajus) / [https://github.com/gajus/swing](https://github.com/gajus/swing) 
+[https://github.com/gajus](https://github.com/gajus) / [https://github.com/gajus/swing](https://github.com/gajus/swing)

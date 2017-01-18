@@ -59,8 +59,9 @@ class App extends Component {
                             children elements is will be Card
                             also XXX removed refs
                         */}
+                        <div className="card spades">🥑</div>
                         <div className="card clubs" >z♣</div>
-                        <div className="card diamonds" >♦</div>
+                        <div className="card diamonds"  ref="card2" >♦</div>
                         <div className="card hearts" >♥</div>
                         <div className="card spades">z♠</div>
                     </Swing>
