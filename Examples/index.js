@@ -85,7 +85,7 @@ class App extends Component {
                         throwout={(e)=>this.swingThrowOutDone(e)} >
 
                       {this.state.cards.map( (x,i)=> {
-                        return <div key={x} ref={x} className="card">{x}</div> }
+                        return <div key={x} ref={x} className="card"><div className='content'>{x}</div></div> }
                       )}
                     </Swing>
                 </div>
