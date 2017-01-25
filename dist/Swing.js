@@ -88,7 +88,7 @@ var Swing = function (_Component) {
         value: function componentDidUpdate(prevProps, prevState) {
             var _this3 = this;
 
-            console.log("react-swing - componentDidUpdate", this.props.children.length, prevProps.children.length);
+            // console.log("react-swing - componentDidUpdate", this.props.children.length,  prevProps.children.length )
 
             _react2.default.Children.forEach(this.props.children, function (child, key) {
                 // console.log(this.state.stack)
@@ -96,7 +96,7 @@ var Swing = function (_Component) {
                 var el = _reactDom2.default.findDOMNode(_this3.refs['' + ref]);
                 // aha!
                 if (!_this3.state.stack.getCard(el)) {
-                    console.log('react-swing - add card');
+                    // console.log('react-swing - add card')
                     var card = _this3.state.stack.createCard(el);
                     card.throwIn(0, -1);
                 }

@@ -66,7 +66,7 @@ class Swing extends Component {
     }
 
     componentDidUpdate(prevProps, prevState){
-      console.log("react-swing - componentDidUpdate", this.props.children.length,  prevProps.children.length )
+      // console.log("react-swing - componentDidUpdate", this.props.children.length,  prevProps.children.length )
 
       React.Children.forEach(this.props.children, (child, key) => {
           // console.log(this.state.stack)
@@ -74,7 +74,7 @@ class Swing extends Component {
           let el = ReactDOM.findDOMNode(this.refs[`${ref}`]);
           // aha!
           if (!this.state.stack.getCard(el)){
-            console.log('react-swing - add card')
+            // console.log('react-swing - add card')
             let card = this.state.stack.createCard(el);
             card.throwIn(0,-1)
           }
