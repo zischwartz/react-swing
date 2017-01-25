@@ -88,7 +88,7 @@ var Swing = function (_Component) {
         value: function componentDidUpdate(prevProps, prevState) {
             var _this3 = this;
 
-            // console.log("componentDidUpdate", this.props.children.length,  prevProps.children.length )
+            console.log("react-swing - componentDidUpdate", this.props.children.length, prevProps.children.length);
             if (this.props.children.length > prevProps.children.length) {
                 var events = ['throwout', 'throwoutend', 'throwoutleft', 'throwoutright', 'throwin', 'throwinend', 'dragstart', 'dragmove', 'dragend'];
                 var stack = this.state.stack;
@@ -106,6 +106,7 @@ var Swing = function (_Component) {
                     var el = _reactDom2.default.findDOMNode(_this3.refs['' + ref]);
                     // aha!
                     if (!_this3.state.stack.getCard(el)) {
+                        console.log('react-swing - add card');
                         var card = _this3.state.stack.createCard(el);
                         card.throwIn(0, -1);
                     }

@@ -66,7 +66,7 @@ class Swing extends Component {
     }
 
     componentDidUpdate(prevProps, prevState){
-      // console.log("componentDidUpdate", this.props.children.length,  prevProps.children.length )
+      console.log("react-swing - componentDidUpdate", this.props.children.length,  prevProps.children.length )
       if(this.props.children.length > prevProps.children.length){
         const events = ['throwout','throwoutend', 'throwoutleft', 'throwoutright', 'throwin', 'throwinend', 'dragstart', 'dragmove','dragend'];
         const stack = this.state.stack;
@@ -84,6 +84,7 @@ class Swing extends Component {
             let el = ReactDOM.findDOMNode(this.refs[`${ref}`]);
             // aha!
             if (!this.state.stack.getCard(el)){
+              console.log('react-swing - add card')
               let card = this.state.stack.createCard(el);
               card.throwIn(0,-1)
             }
