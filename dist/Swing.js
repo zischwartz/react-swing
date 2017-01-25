@@ -89,6 +89,21 @@ var Swing = function (_Component) {
             var _this3 = this;
 
             console.log("react-swing - componentDidUpdate", this.props.children.length, prevProps.children.length);
+
+            _react2.default.Children.forEach(this.props.children, function (child, key) {
+                // console.log(this.state.stack)
+                var ref = child.ref || key;
+                var el = _reactDom2.default.findDOMNode(_this3.refs['' + ref]);
+                // aha!
+                if (!_this3.state.stack.getCard(el)) {
+                    console.log('react-swing - add card');
+                    var card = _this3.state.stack.createCard(el);
+                    card.throwIn(0, -1);
+                }
+            });
+
+            // xxx do we still need that set stack?
+
             if (this.props.children.length > prevProps.children.length) {
                 var events = ['throwout', 'throwoutend', 'throwoutleft', 'throwoutright', 'throwin', 'throwinend', 'dragstart', 'dragmove', 'dragend'];
                 var stack = this.state.stack;
@@ -99,39 +114,6 @@ var Swing = function (_Component) {
                 //         stack.on(event, this.props[event]);
                 //     }
                 // });
-
-                _react2.default.Children.forEach(this.props.children, function (child, key) {
-                    // console.log(this.state.stack)
-                    var ref = child.ref || key;
-                    var el = _reactDom2.default.findDOMNode(_this3.refs['' + ref]);
-                    // aha!
-                    if (!_this3.state.stack.getCard(el)) {
-                        console.log('react-swing - add card');
-                        var card = _this3.state.stack.createCard(el);
-                        card.throwIn(0, -1);
-                    }
-                    // console.log(stack.getCard(el) )
-                    // we need to check and only create the card IF it's not already been created
-                    // we need to check and only create the card IF it's not already been created
-                    // we need to check and only create the card IF it's not already been created
-                    // let card = this.stack.createCard(el);
-                    // zomg this is it
-                    // https://github.com/gajus/swing/blob/1dc4ad9665cd42e5ace7006f90bdec92b8a3f03c/src/Card.js#L39
-                    // let card = Card(stack, el)
-                    // card.throwIn(0,-1)
-                    // console.log(card)
-                    // let result = prevProps.children.find((c) => {
-                    //   return c.key === child.key
-                    // })
-                    //
-                    // if(!result){
-                    //   events.map((event) => {
-                    //       if (child.props[event]) {
-                    //           card.on(event, child.props[event]);
-                    //       }
-                    //   });
-                    // }
-                });
                 this.setState({
                     stack: stack
                 });

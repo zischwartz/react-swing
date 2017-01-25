@@ -67,6 +67,21 @@ class Swing extends Component {
 
     componentDidUpdate(prevProps, prevState){
       console.log("react-swing - componentDidUpdate", this.props.children.length,  prevProps.children.length )
+
+      React.Children.forEach(this.props.children, (child, key) => {
+          // console.log(this.state.stack)
+          let ref = child.ref || key;
+          let el = ReactDOM.findDOMNode(this.refs[`${ref}`]);
+          // aha!
+          if (!this.state.stack.getCard(el)){
+            console.log('react-swing - add card')
+            let card = this.state.stack.createCard(el);
+            card.throwIn(0,-1)
+          }
+      });
+
+      // xxx do we still need that set stack?
+
       if(this.props.children.length > prevProps.children.length){
         const events = ['throwout','throwoutend', 'throwoutleft', 'throwoutright', 'throwin', 'throwinend', 'dragstart', 'dragmove','dragend'];
         const stack = this.state.stack;
@@ -77,39 +92,6 @@ class Swing extends Component {
         //         stack.on(event, this.props[event]);
         //     }
         // });
-
-        React.Children.forEach(this.props.children, (child, key) => {
-            // console.log(this.state.stack)
-            let ref = child.ref || key;
-            let el = ReactDOM.findDOMNode(this.refs[`${ref}`]);
-            // aha!
-            if (!this.state.stack.getCard(el)){
-              console.log('react-swing - add card')
-              let card = this.state.stack.createCard(el);
-              card.throwIn(0,-1)
-            }
-            // console.log(stack.getCard(el) )
-            // we need to check and only create the card IF it's not already been created
-            // we need to check and only create the card IF it's not already been created
-            // we need to check and only create the card IF it's not already been created
-            // let card = this.stack.createCard(el);
-            // zomg this is it
-            // https://github.com/gajus/swing/blob/1dc4ad9665cd42e5ace7006f90bdec92b8a3f03c/src/Card.js#L39
-            // let card = Card(stack, el)
-            // card.throwIn(0,-1)
-            // console.log(card)
-            // let result = prevProps.children.find((c) => {
-            //   return c.key === child.key
-            // })
-            //
-            // if(!result){
-            //   events.map((event) => {
-            //       if (child.props[event]) {
-            //           card.on(event, child.props[event]);
-            //       }
-            //   });
-            // }
-        });
         this.setState({
             stack: stack
         });
